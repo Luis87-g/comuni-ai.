@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1D4E89">
+<title>COMUNI-AI · Comunicador accesible</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="bar" id="bar" hidden>
+  <h1 id="title">Tablero</h1>
+  <span id="who" class="chip"></span>
+  <button id="langBtn" class="chip" aria-label="Idioma de voz">🇪🇸 Español</button>
+</header>
+
+<main id="main">
+
+<!-- 1. INICIO -->
+<section id="home" class="screen active" aria-labelledby="homeTitle">
+  <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
+  <div class="top">
+    <div class="mascot">
+      <span class="hi">¡Hola! 👋</span>
+      <svg viewBox="0 0 200 120" aria-hidden="true">
+        <path d="M20 60C40 108 160 108 180 60C150 68 125 70 100 70C75 70 50 68 20 60Z" fill="#E53935" stroke="#3b0a0a" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M36 62C70 72 130 72 164 62C150 84 50 84 36 62Z" fill="#fff"/>
+        <path d="M20 60C50 18 85 24 100 38C115 24 150 18 180 60C150 66 125 68 100 68C75 68 50 66 20 60Z" fill="#B71C1C" stroke="#3b0a0a" stroke-width="4" stroke-linejoin="round"/>
+        <ellipse cx="62" cy="44" rx="14" ry="4" fill="#fff" opacity=".7"/>
+      </svg>
+    </div>
+    <h2 id="homeTitle">COMUNI-AI</h2>
+    <p class="tag">Di lo que sientes.<br>Mira, escucha y entiende.</p>
+  </div>
+  <ul class="feats">
+    <li><i>🖼️</i>Toca imágenes y habla</li>
+    <li><i>👀</i>Lee los labios en vivo</li>
+    <li><i>🌐</i>Traduce a 6 idiomas</li>
+  </ul>
+  <div class="cta">
+    <button class="btn big go" data-guest>Empezar ahora 🚀</button>
+    <button class="btn big ghost" id="openLogin">Ya tengo cuenta</button>
+    <p class="hint">Sin registro · Funciona en tu teléfono</p>
+  </div>
+</section>
+
+<!-- 1b. LOGIN (pantalla 2) -->
+<section id="login" class="screen" aria-label="Iniciar sesión">
+  <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
+  <button class="back" id="backHome" aria-label="Volver">‹</button>
+  <div class="mascot sm">
+      <span class="hi">¡Hola! 👋</span>
+      <svg viewBox="0 0 200 120" aria-hidden="true">
+        <path d="M20 60C40 108 160 108 180 60C150 68 125 70 100 70C75 70 50 68 20 60Z" fill="#E53935" stroke="#3b0a0a" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M36 62C70 72 130 72 164 62C150 84 50 84 36 62Z" fill="#fff"/>
+        <path d="M20 60C50 18 85 24 100 38C115 24 150 18 180 60C150 66 125 68 100 68C75 68 50 66 20 60Z" fill="#B71C1C" stroke="#3b0a0a" stroke-width="4" stroke-linejoin="round"/>
+        <ellipse cx="62" cy="44" rx="14" ry="4" fill="#fff" opacity=".7"/>
+      </svg>
+    </div>
+  <h2>COMUNI-AI</h2>
+  <form class="glass" id="loginForm" novalidate>
+    <div class="seg" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-mode="login">Entrar</button>
+      <button type="button" role="tab" aria-selected="false" data-mode="register">Crear cuenta</button>
+    </div>
+    <label class="fld"><i>✉️</i><input id="uName" type="email" placeholder="Correo electrónico" autocomplete="email" autocapitalize="none" aria-label="Correo electrónico"></label>
+    <label class="fld"><i>🔒</i><input id="uPass" type="password" placeholder="Contraseña" autocomplete="current-password" aria-label="Contraseña"><button type="button" id="eye" aria-label="Mostrar contraseña">👁</button></label>
+    <p id="loginMsg" class="msg" role="alert"></p>
+    <button class="btn big glow" id="loginBtn" type="submit">Entrar</button>
+    <button type="button" class="lnk" id="forgot">¿Olvidaste tu contraseña?</button>
+    <div class="soc"><button type="button" class="soc-b" data-soc="Google">G&nbsp; Google</button><button type="button" class="soc-b" data-soc="Facebook">f&nbsp; Facebook</button></div>
+  </form>
+  <button class="lnk" data-guest>Continuar como invitado</button>
+</section>
+
+<!-- 2. COMUNICADOR -->
+<section id="board" class="screen" aria-label="Comunicador">
+  <div class="slot" data-avatar></div>
+  <div class="card">
+    <div id="msg" class="msgbox" aria-live="polite" data-ph="Toca imágenes o escribe tu mensaje…"></div>
+    <div class="row">
+      <button class="btn green grow" id="bSpeak">🔊 Hablar</button>
+      <button class="btn amber" id="bWord" aria-label="Borrar última palabra">↩️ Palabra</button>
+      <button class="btn red" id="bClear" aria-label="Borrar todo">🗑️</button>
+    </div>
+  </div>
+  <h2 class="sec">✨ Sugerencias IA</h2>
+  <div class="chips" id="sugs"></div>
+  <h2 class="sec">Pictogramas</h2>
+  <div class="grid" id="pictos"></div>
+  <button class="btn outline" id="kbToggle" aria-expanded="false">⌨️ Teclado</button>
+  <div id="kb" class="kb" hidden></div>
+</section>
+
+<!-- 3. CHAT IA -->
+<section id="chat" class="screen" aria-label="Asistente IA">
+  <div class="slot" data-avatar></div>
+  <div class="chatlog" id="chatlog" aria-live="polite"></div>
+  <div class="chips" id="chatPictos"></div>
+  <form class="row" id="chatForm">
+    <input id="chatIn" placeholder="Escribe aquí…" aria-label="Mensaje" enterkeyhint="send">
+    <button class="btn primary" aria-label="Enviar">➤</button>
+  </form>
+</section>
+
+<!-- 4. TRADUCTOR -->
+<section id="trans" class="screen" aria-label="Traductor">
+  <div class="card">
+    <div class="row langs">
+      <select id="from" aria-label="Idioma de origen"></select>
+      <button class="btn amber" id="swap" aria-label="Intercambiar idiomas">⇄</button>
+      <select id="to" aria-label="Idioma de destino"></select>
+    </div>
+    <label for="tIn">Texto original</label>
+    <textarea id="tIn" placeholder="Escribe lo que quieres traducir…"></textarea>
+    <button class="btn outline" id="tFromBoard">📋 Usar mi mensaje del tablero</button>
+    <button class="btn big primary" id="tGo">🌐 Traducir</button>
+    <label>Resultado</label>
+    <div id="tOut" class="result" aria-live="polite">La traducción aparecerá aquí.</div>
+    <button class="btn big green" id="tSpeak">👄 Escuchar y ver labios</button>
+  </div>
+  <div class="slot" data-avatar></div>
+</section>
+
+<!-- 5. TEXTO A VOZ -->
+<section id="tts" class="screen" aria-label="Texto a voz">
+  <div class="slot" data-avatar></div>
+  <div class="card">
+    <label for="ttsIn">Frase</label>
+    <textarea id="ttsIn" placeholder="Escribe cualquier frase…"></textarea>
+    <label for="ttsRate">Velocidad: <b id="rateOut">0.9×</b></label>
+    <input id="ttsRate" type="range" min="0.4" max="1.5" step="0.1" value="0.9">
+    <label for="ttsPitch">Tono: <b id="pitchOut">1</b></label>
+    <input id="ttsPitch" type="range" min="0.5" max="1.5" step="0.1" value="1">
+    <div class="row">
+      <button class="btn big green grow" id="pPlay">▶️ Reproducir</button>
+      <button class="btn amber" id="pPause" aria-label="Pausar">⏸️</button>
+      <button class="btn red" id="pStop" aria-label="Detener">⏹️</button>
+    </div>
+  </div>
+</section>
+
+<!-- 6. HISTORIAL Y PERFIL -->
+<section id="profile" class="screen" aria-label="Historial y ajustes">
+  <div class="card">
+    <h2>⚙️ Accesibilidad</h2>
+    <label class="sw"><input type="checkbox" id="sContrast"> Alto contraste</label>
+    <label class="sw"><input type="checkbox" id="sSilent"> Solo labios (sin voz)</label>
+    <label for="sSize">Tamaño del texto</label>
+    <input id="sSize" type="range" min="90" max="140" step="5" value="100">
+    <label for="sVoice">Voz</label>
+    <select id="sVoice"></select>
+  </div>
+  <div class="card">
+    <h2>🕘 Mensajes anteriores</h2>
+    <ul id="hist" class="hist"></ul>
+    <button class="btn outline" id="histClear">Borrar historial</button>
+  </div>
+  <button class="btn red" id="logout">Cerrar sesión</button>
+</section>
+
+</main>
+
+<!-- AVATAR (único, se mueve a cada pantalla) -->
+<div id="avatar" class="avatar">
+  <div class="stage">
+    <svg id="lips" viewBox="0 0 400 300" role="img" aria-label="Boca que pronuncia el mensaje para leer los labios">
+      <defs>
+        <linearGradient id="gU" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e0f12"/><stop offset=".55" stop-color="#b3201f"/><stop offset="1" stop-color="#8d1417"/></linearGradient>
+        <linearGradient id="gL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d1114"/><stop offset=".5" stop-color="#d03a30"/><stop offset="1" stop-color="#a11a1b"/></linearGradient>
+        <radialGradient id="skin" cx=".5" cy=".45" r=".75"><stop offset="0" stop-color="#F9D5B8"/><stop offset="1" stop-color="#EDB48F"/></radialGradient>
+        <clipPath id="clip"><path id="clipP"/></clipPath>
+      <pattern id="pt" width="5" height="8" patternUnits="userSpaceOnUse"><path d="M2.5 0V8" stroke="#3b0508" stroke-width=".7" opacity=".5"/></pattern><linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#d6d6dc"/></linearGradient><clipPath id="clipL"><use href="#lo"/><use href="#up"/></clipPath><filter id="bl"><feGaussianBlur stdDeviation="6"/></filter></defs>
+      <rect width="400" height="300" fill="url(#skin)"/>
+      <ellipse cx="172" cy="14" rx="20" ry="9" fill="#d98f6c" opacity=".55"/><ellipse cx="228" cy="14" rx="20" ry="9" fill="#d98f6c" opacity=".55"/>
+      <path d="M186 30C190 48 190 56 186 64M214 30C210 48 210 56 214 64" stroke="#d98f6c" stroke-width="5" fill="none" stroke-linecap="round" opacity=".6"/>
+      <ellipse cx="200" cy="292" rx="70" ry="10" fill="#d98f6c" opacity=".5"/>
+      <g filter="url(#bl)" opacity=".45"><ellipse cx="200" cy="262" rx="70" ry="14" fill="#b86b4a"/><path d="M86 70C70 130 90 210 120 250M314 70C330 130 310 210 280 250" stroke="#c98563" stroke-width="14" fill="none"/></g>
+      <path id="cav" fill="#1c0405"/>
+      <g clip-path="url(#clip)">
+        <rect id="tU" fill="url(#gT)" rx="12"/><rect id="tL" fill="#dcdce0" rx="10"/><ellipse id="tg" fill="#c4474f"/>
+      </g>
+      <path id="lo" fill="url(#gL)" stroke="#2b0507" stroke-width="3" stroke-linejoin="round"/>
+      <path id="up" fill="url(#gU)" stroke="#2b0507" stroke-width="3" stroke-linejoin="round"/>
+      <rect width="400" height="300" fill="url(#pt)" clip-path="url(#clipL)"/>
+      <g fill="#fff" opacity=".7">
+        <ellipse id="g1" rx="26" ry="6"/><ellipse id="g2" rx="9" ry="4"/><ellipse id="g3" rx="16" ry="4"/><ellipse id="g4" rx="22" ry="4"/><ellipse id="g5" rx="10" ry="3"/>
+      </g>
+    </svg>
+    <div id="vis" class="vis" aria-hidden="true"></div>
+  </div>
+  <p id="caption" class="caption" aria-live="polite">Toca Hablar y lee mis labios 👀</p>
+  <button class="chip-btn" id="slow" aria-pressed="false">🐢 Modo lento para leer labios</button>
+</div>
+
+<nav class="nav" id="nav" hidden aria-label="Navegación principal">
+  <button data-go="board" class="on">🗣️<span>Tablero</span></button>
+  <button data-go="chat">🤖<span>Chat IA</span></button>
+  <button data-go="trans">🌐<span>Traducir</span></button>
+  <button data-go="tts">🔊<span>Voz</span></button>
+  <button data-go="profile">⚙️<span>Perfil</span></button>
+</nav>
+<script src="app.js"></script>
+</body>
+</html>

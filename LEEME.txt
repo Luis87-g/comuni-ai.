@@ -1,0 +1,6 @@
+COMUNI-AI - Comunicador accesible
+1) Inicio -> Login (pantalla 2) -> Tablero. Cuentas locales con correo (se guardan en el telefono).
+2) Boton 🇪🇸/🇬🇧 arriba: en modo English todo lo que escribes se traduce y los labios lo dicen en ingles.
+3) Sube la carpeta a GitHub Pages/Netlify o abre index.html en Chrome (Android) / Safari (iOS).
+4) Traduccion: usa internet (MyMemory); sin conexion traduce frases basicas del tablero.
+5) Google/Facebook: requieren un backend (Firebase). IA real: CONFIG.AI_ENDPOINT en app.js.
